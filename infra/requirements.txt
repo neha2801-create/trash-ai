@@ -3,3 +3,4 @@ localstack-client
 boto3<2
 awscli
 aws-cdk-lib
+security==1.3.1
