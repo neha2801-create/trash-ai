@@ -5,7 +5,6 @@ import hashlib
 import json
 import logging
 import os
-from random import randint
 from pathlib import Path
 from typing import Dict, Union
 
@@ -16,6 +15,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.params import Form
 from mangum import Mangum
+import secrets
 
 logging.basicConfig()
 
@@ -171,7 +171,7 @@ async def upload(
 
 @app.get("/test")
 async def test():
-    rint = randint(0, 100000000)
+    rint = secrets.SystemRandom().randint(0, 100000000)
     return {"message": f"Hello World: {rint}"}
 
 
