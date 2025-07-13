@@ -13,6 +13,7 @@ import sys
 from typing import Iterable, List
 
 import boto3
+from security import safe_command
 
 IS_GITHUB = os.environ.get("GITHUB_ACTIONS", "false") == "true"
 
@@ -106,8 +107,7 @@ class Cmd:
             GHOut.groupstart(f"{self.name} {cmd_txt}")
             GHOut.notice(f"Executing {cmd_txt}, working dir: {self.working_dir}")
             try:
-                with subprocess.Popen(
-                    self.cmd,
+                with safe_command.run(subprocess.Popen, self.cmd,
                     cwd=str(self.working_dir),
                     stdout=subprocess.PIPE,
                     env=os.environ,
